@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev
 export default defineConfig({
   plugins: [react()],
-  base: '/pizzeria/', // 👈 Aquí va el nombre exacto de tu repositorio de GitHub
+base: '/pizzeria-hito3/', 
 })
