@@ -1,6 +1,6 @@
 # 🍕 Pizzería Mamma Mia! 
 
-Pagina web https://anita6684.github.io/pizzeria
+Pagina web https://anita6684.github.io/pizzeria-hito3
 
 Proyecto desarrollado para Desafío Latam utilizando React y Vite.
 
