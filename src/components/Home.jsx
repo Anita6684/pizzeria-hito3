@@ -1,29 +1,7 @@
 import React from 'react';
 import Header from './Header.jsx';
 import CardPizza from './CardPizza.jsx';
-
-import napolitana from '../assets/imgs/napolitana.png';
-
-const pizzas = [
-  {
-    name: 'Napolitana',
-    price: 5950,
-    ingredients: ['mozzarella', 'tomates', 'jamón', 'orégano'],
-    img: napolitana,
-  },
-  {
-    name: 'Española',
-    price: 6950,
-    ingredients: ['mozzarella', 'gorgonzola', 'parmesano', 'provolone'],
-    img: napolitana,
-  },
-  {
-    name: 'Pepperoni',
-    price: 6950,
-    ingredients: ['mozzarella', 'pepperoni', 'orégano'],
-    img: napolitana,
-  },
-];
+import { pizzas } from '../utils/pizza.js';
 
 const Home = () => {
   return (
@@ -42,7 +20,7 @@ const Home = () => {
 
           <div className="row g-4 justify-content-center">
             {pizzas.map((pizza) => (
-              <div className="col-12 col-md-6 col-lg-4" key={pizza.name}>
+              <div className="col-12 col-md-6 col-lg-4" key={pizza.id}>
                 <CardPizza
                   name={pizza.name}
                   price={pizza.price}
@@ -59,4 +37,5 @@ const Home = () => {
 };
 
 export default Home;
+
 

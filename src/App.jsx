@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from './components/Navbar.jsx';
-import Home from './components/Home.jsx';
 import Footer from './components/Footer.jsx';
-import Register from './components/Register.jsx';
-import Login from './components/Login.jsx';
+import Cart from './components/Cart.jsx';
+
+// import Home from './components/Home.jsx';
+// import Login from './components/Login.jsx';
+// import Register from './components/Register.jsx';
 
 function App() {
-  const [page, setPage] = useState('home');
-
   return (
     <>
-      <Navbar setPage={setPage} />
+      <Navbar />
 
-      {page === 'home' && <Home />}
-      {page === 'login' && <Login />}
-      {page === 'register' && <Register />}
+      {/* <Home /> */}
+      {/* <Login /> */}
+      {/* <Register /> */}
+
+      <Cart />
 
       <Footer />
     </>
