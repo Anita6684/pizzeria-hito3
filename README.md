@@ -1,37 +1,26 @@
-# 🍕 Pizzería Mamma Mia! 
+# 🍕 Pizzería Mamma Mia — Hito 4
 
-Pagina web https://anita6684.github.io/pizzeria-hito3
+Aplicación web desarrollada con **React + Vite**, que permite visualizar pizzas consumidas desde una API REST.
 
-Proyecto desarrollado para Desafío Latam utilizando React y Vite.
+### Tecnologías
 
-Hitos realizados
-Hito 1
-Creación de la aplicación con React y Vite.
-Componentes de la pizzería.
-Diseño con Bootstrap.
+- React
+- Vite
+- JavaScript
+- Bootstrap
+- CSS
 
-Hito 2
-Implementación de Login.
-Implementación de Register.
-Validación de formularios.
+### Funcionalidades
 
-Hito 3
-Renderizado dinámico de las 6 pizzas.
-Uso de map() y props.
-Creación del carrito de compras.
-Aumento y disminución de cantidades.
-Cálculo del total del carrito.
+- Consumo de API de pizzas.
+- Visualización del menú.
+- Detalle de pizzas.
+- Carrito de compras.
 
-Tecnologías
-React
-Vite
-JavaScript
-Bootstrap
-CSS
+### GitHub
 
-Autora:Anamaria Flores Medina
+https://github.com/Anita6684/pizzeria-hito3
 
+### Autora
 
-
-
-
+**Anamaria Flores Medina**

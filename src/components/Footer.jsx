@@ -5,7 +5,7 @@ const Footer = () => {
       <div className="container text-center">
         <p className="mb-1 fw-semibold">🍕 Pizzería Mamma Mia!</p>
         <p className="mb-0 text-white-50">
-          © 2021 - Pizzería Mamma Mia! - Todos los derechos reservados
+          © 2026 - Pizzería Mamma Mia! - Todos los derechos reservados
         </p>
       </div>
     </footer>

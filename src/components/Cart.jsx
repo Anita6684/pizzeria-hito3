@@ -1,32 +1,11 @@
-import React, { useState } from 'react';
-import { pizzaCart } from '../utils/pizza.js';
+import React from 'react';
 import { formatPrice } from '../utils/formatPrice.js';
 
-const Cart = () => {
-  const [cart, setCart] = useState(pizzaCart);
-
-  const increaseQuantity = (id) => {
-    setCart((currentCart) =>
-      currentCart.map((pizza) =>
-        pizza.id === id
-          ? { ...pizza, quantity: pizza.quantity + 1 }
-          : pizza
-      )
-    );
-  };
-
-  const decreaseQuantity = (id) => {
-    setCart((currentCart) =>
-      currentCart
-        .map((pizza) =>
-          pizza.id === id
-            ? { ...pizza, quantity: pizza.quantity - 1 }
-            : pizza
-        )
-        .filter((pizza) => pizza.quantity > 0)
-    );
-  };
-
+const Cart = ({
+  cart = [],
+  increaseQuantity,
+  decreaseQuantity
+}) => {
   const total = cart.reduce(
     (acc, pizza) => acc + pizza.price * pizza.quantity,
     0
@@ -38,7 +17,9 @@ const Cart = () => {
         <h2 className="fw-bold mb-4">🛒 Carrito de compras</h2>
 
         {cart.length === 0 ? (
-          <p className="text-secondary">Tu carrito está vacío.</p>
+          <p className="text-secondary">
+            Tu carrito está vacío.
+          </p>
         ) : (
           <>
             <div className="row g-4">
@@ -57,7 +38,10 @@ const Cart = () => {
                         </div>
 
                         <div className="col-5 col-md-5">
-                          <h5 className="fw-bold mb-1">{pizza.name}</h5>
+                          <h5 className="fw-bold mb-1">
+                            {pizza.name}
+                          </h5>
+
                           <p className="mb-0 text-secondary">
                             ${formatPrice(pizza.price)}
                           </p>
@@ -65,9 +49,12 @@ const Cart = () => {
 
                         <div className="col-4 col-md-5">
                           <div className="d-flex align-items-center justify-content-end gap-2">
+
                             <button
                               className="btn btn-outline-danger"
-                              onClick={() => decreaseQuantity(pizza.id)}
+                              onClick={() =>
+                                decreaseQuantity(pizza.id)
+                              }
                             >
                               −
                             </button>
@@ -78,10 +65,13 @@ const Cart = () => {
 
                             <button
                               className="btn btn-outline-success"
-                              onClick={() => increaseQuantity(pizza.id)}
+                              onClick={() =>
+                                increaseQuantity(pizza.id)
+                              }
                             >
                               +
                             </button>
+
                           </div>
                         </div>
 
@@ -111,3 +101,4 @@ const Cart = () => {
 };
 
 export default Cart;
+
