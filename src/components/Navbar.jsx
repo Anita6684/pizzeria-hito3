@@ -4,12 +4,10 @@ import { formatPrice } from '../utils/formatPrice.js';
 
 const Navbar = () => {
   const total = 25000;
-  const token = false;
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
       <div className="container">
-
         <Link
           className="navbar-brand fw-bold d-flex align-items-center gap-2 text-white text-decoration-none"
           to="/"
@@ -32,7 +30,6 @@ const Navbar = () => {
 
         <div className="collapse navbar-collapse" id="mainNavbar">
           <div className="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-
             <Link
               className="btn btn-outline-light btn-sm nav-btn"
               to="/"
@@ -40,39 +37,26 @@ const Navbar = () => {
               🍕 Home
             </Link>
 
-            {token ? (
-              <>
-                <Link
-                  className="btn btn-outline-light btn-sm nav-btn"
-                  to="/profile"
-                >
-                  👤 Profile
-                </Link>
+            <Link
+              className="btn btn-outline-light btn-sm nav-btn"
+              to="/login"
+            >
+              🔐 Login
+            </Link>
 
-                <Link
-                  className="btn btn-outline-light btn-sm nav-btn"
-                  to="/"
-                >
-                  🔒 Logout
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link
-                  className="btn btn-outline-light btn-sm nav-btn"
-                  to="/login"
-                >
-                  🔐 Login
-                </Link>
+            <Link
+              className="btn btn-outline-light btn-sm nav-btn"
+              to="/register"
+            >
+              🔐 Register
+            </Link>
 
-                <Link
-                  className="btn btn-outline-light btn-sm nav-btn"
-                  to="/register"
-                >
-                  🔐 Register
-                </Link>
-              </>
-            )}
+            <Link
+              className="btn btn-outline-light btn-sm nav-btn"
+              to="/profile"
+            >
+              👤 Profile
+            </Link>
 
             <Link
               className="btn btn-warning btn-sm fw-semibold nav-btn total-btn"
@@ -80,7 +64,6 @@ const Navbar = () => {
             >
               🛒 Total: ${formatPrice(total)}
             </Link>
-
           </div>
         </div>
       </div>
