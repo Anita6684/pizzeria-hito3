@@ -1,51 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import Header from './Header.jsx';
-import CardPizza from './CardPizza.jsx';
-import Pizza from './Pizza.jsx';
+import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header.jsx';
+import CardPizza from '../components/CardPizza.jsx';
 import napolitana from '../assets/imgs/napolitana.png';
 
 const Home = ({ addToCart }) => {
   const [pizzas, setPizzas] = useState([]);
-  const [selectedPizza, setSelectedPizza] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://localhost:5000/api/pizzas')
-      .then((response) => response.json())
-      .then((data) => setPizzas(data))
-      .catch((error) =>
-        console.error('Error al obtener las pizzas:', error)
-      );
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Error al obtener las pizzas');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setPizzas(data);
+      })
+      .catch((error) => {
+        console.error('Error al obtener las pizzas:', error);
+      });
   }, []);
-
-  if (selectedPizza) {
-    return (
-      <main>
-        <Header />
-
-        <Pizza
-          pizza={{
-            ...selectedPizza,
-            img: napolitana
-          }}
-          onAddToCart={() =>
-            addToCart({
-              ...selectedPizza,
-              img: napolitana
-            })
-          }
-        />
-
-        <div className="container pb-5 text-center">
-          <button
-            className="btn btn-outline-dark"
-            onClick={() => setSelectedPizza(null)}
-          >
-            Volver al menú
-          </button>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main>
@@ -76,13 +54,15 @@ const Home = ({ addToCart }) => {
                   price={pizza.price}
                   ingredients={pizza.ingredients}
                   img={napolitana}
-                  onViewMore={() => setSelectedPizza(pizza)}
-                  onAddToCart={() =>
-                    addToCart({
-                      ...pizza,
-                      img: napolitana
-                    })
-                  }
+                  onViewMore={() => navigate('/pizza/p001')}
+                  onAddToCart={() => {
+                    if (addToCart) {
+                      addToCart({
+                        ...pizza,
+                        img: napolitana
+                      });
+                    }
+                  }}
                 />
               </div>
             ))}

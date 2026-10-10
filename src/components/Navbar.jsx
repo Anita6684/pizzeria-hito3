@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils/formatPrice.js';
 
-const Navbar = ({ setPage }) => {
+const Navbar = () => {
   const total = 25000;
   const token = false;
 
@@ -9,13 +10,13 @@ const Navbar = ({ setPage }) => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
       <div className="container">
 
-        <button
-          className="navbar-brand fw-bold d-flex align-items-center gap-2 btn btn-link text-white text-decoration-none"
-          onClick={() => setPage('home')}
+        <Link
+          className="navbar-brand fw-bold d-flex align-items-center gap-2 text-white text-decoration-none"
+          to="/"
         >
           <span className="brand-pizza">🍕</span>
           Mamma Mia!
-        </button>
+        </Link>
 
         <button
           className="navbar-toggler"
@@ -32,44 +33,53 @@ const Navbar = ({ setPage }) => {
         <div className="collapse navbar-collapse" id="mainNavbar">
           <div className="navbar-nav ms-auto align-items-lg-center gap-lg-2">
 
-            <button
+            <Link
               className="btn btn-outline-light btn-sm nav-btn"
-              onClick={() => setPage('home')}
+              to="/"
             >
               🍕 Home
-            </button>
+            </Link>
 
             {token ? (
               <>
-                <button className="btn btn-outline-light btn-sm nav-btn">
-                  🔓 Profile
-                </button>
+                <Link
+                  className="btn btn-outline-light btn-sm nav-btn"
+                  to="/profile"
+                >
+                  👤 Profile
+                </Link>
 
-                <button className="btn btn-outline-light btn-sm nav-btn">
+                <Link
+                  className="btn btn-outline-light btn-sm nav-btn"
+                  to="/"
+                >
                   🔒 Logout
-                </button>
+                </Link>
               </>
             ) : (
               <>
-                <button
+                <Link
                   className="btn btn-outline-light btn-sm nav-btn"
-                  onClick={() => setPage('login')}
+                  to="/login"
                 >
                   🔐 Login
-                </button>
+                </Link>
 
-                <button
+                <Link
                   className="btn btn-outline-light btn-sm nav-btn"
-                  onClick={() => setPage('register')}
+                  to="/register"
                 >
                   🔐 Register
-                </button>
+                </Link>
               </>
             )}
 
-            <button className="btn btn-warning btn-sm fw-semibold nav-btn total-btn">
+            <Link
+              className="btn btn-warning btn-sm fw-semibold nav-btn total-btn"
+              to="/cart"
+            >
               🛒 Total: ${formatPrice(total)}
-            </button>
+            </Link>
 
           </div>
         </div>
