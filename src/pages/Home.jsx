@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext.jsx';
 import Header from '../components/Header.jsx';
 import CardPizza from '../components/CardPizza.jsx';
 import napolitana from '../assets/imgs/napolitana.png';
 
-const Home = ({ addToCart }) => {
+const Home = () => {
   const [pizzas, setPizzas] = useState([]);
-
+  const { addToCart } = useCart();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,14 +56,12 @@ const Home = ({ addToCart }) => {
                   ingredients={pizza.ingredients}
                   img={napolitana}
                   onViewMore={() => navigate('/pizza/p001')}
-                  onAddToCart={() => {
-                    if (addToCart) {
-                      addToCart({
-                        ...pizza,
-                        img: napolitana
-                      });
-                    }
-                  }}
+                  onAddToCart={() =>
+                    addToCart({
+                      ...pizza,
+                      img: napolitana,
+                    })
+                  }
                 />
               </div>
             ))}
@@ -74,6 +73,7 @@ const Home = ({ addToCart }) => {
 };
 
 export default Home;
+
 
 
 

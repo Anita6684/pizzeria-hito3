@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext.jsx';
 import { formatPrice } from '../utils/formatPrice.js';
 
 const Navbar = () => {
-  const total = 25000;
+  const { total } = useCart();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
@@ -30,31 +31,19 @@ const Navbar = () => {
 
         <div className="collapse navbar-collapse" id="mainNavbar">
           <div className="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-            <Link
-              className="btn btn-outline-light btn-sm nav-btn"
-              to="/"
-            >
+            <Link className="btn btn-outline-light btn-sm nav-btn" to="/">
               🍕 Home
             </Link>
 
-            <Link
-              className="btn btn-outline-light btn-sm nav-btn"
-              to="/login"
-            >
+            <Link className="btn btn-outline-light btn-sm nav-btn" to="/login">
               🔐 Login
             </Link>
 
-            <Link
-              className="btn btn-outline-light btn-sm nav-btn"
-              to="/register"
-            >
+            <Link className="btn btn-outline-light btn-sm nav-btn" to="/register">
               🔐 Register
             </Link>
 
-            <Link
-              className="btn btn-outline-light btn-sm nav-btn"
-              to="/profile"
-            >
+            <Link className="btn btn-outline-light btn-sm nav-btn" to="/profile">
               👤 Profile
             </Link>
 

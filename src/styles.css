@@ -1,3 +1,6 @@
+/* ==========================================
+   ESTILOS GENERALES Y BASE
+   ========================================== */
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -21,36 +24,60 @@ body {
   min-width: 150px;
 }
 
+/* ==========================================
+   SECCIÓN HERO (BANNER PRINCIPAL)
+   ========================================== */
 .hero-section {
+  position: relative;
+  width: 100%;
   min-height: 390px;
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)),
-    url("https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fpizza-1239077_640_cl.jpg?alt=media&token=6a9a33da-5c00-49d4-9080-784dcc87ec2c");
+  /* Se añade la URL entre comillas simples para evitar errores de compilación en Vite */
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
+    url('https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fpizza-1239077_640_cl.jpg?alt=media&token=6a9a33da-5c00-49d4-9080-784dcc87ec2c');
   background-size: cover;
   background-position: center;
-}
-
-.hero-overlay {
-  min-height: 390px;
+  background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.hero-overlay {
+  width: 100%;
+  min-height: 390px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
 }
 
 .hero-kicker {
   letter-spacing: 0.18em;
   font-size: 0.82rem;
   font-weight: 700;
+  color: #ffffff !important;
 }
 
 .hero-section h1 {
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  font-size: 3.5rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  color: #ffffff !important;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-section .lead {
   max-width: 680px;
+  color: #ffffff !important;
+  position: relative;
+  z-index: 1;
 }
 
+/* ==========================================
+   SECCIÓN DE CARTAS DE PIZZA
+   ========================================== */
 .pizza-section {
   background: #f8f9fa;
 }
@@ -108,6 +135,9 @@ body {
   font-weight: 800;
 }
 
+/* ==========================================
+   RESPONSIVE DESIGN (DISEÑO ADAPTABLE)
+   ========================================== */
 @media (max-width: 991.98px) {
   .navbar-nav {
     padding-top: 1rem;
