@@ -1,15 +1,13 @@
+# 🍕 Pizzería Mamma Mia — Hito 7
 
-# 🍕 Pizzería Mamma Mia — Hito 6
+Aplicación web desarrollada con React y Vite, incorporando React Router y Context API para gestionar usuarios y el carrito de compras.
 
-Aplicación web desarrollada con React, Vite y Context API para gestionar el carrito de compras.
+**Funcionalidades:** menú de pizzas, detalle de productos, carrito de compras, gestión de sesión de usuario, rutas protegidas y botón de pago habilitado según el inicio de sesión.
 
-**Funcionalidades:** menú de pizzas, agregar y eliminar productos, control de cantidades y cálculo automático del total.
+**Tecnologías:** React, Vite, React Router, Context API, Bootstrap y CSS.
 
-**Tecnologías:** React, React Router, Context API, Bootstrap y CSS.
+**Página web:** [https://anita6684.github.io/pizzeria-hito3/](https://anita6684.github.io/pizzeria-hito3/)
 
-**Página web:** https://anita6684.github.io/pizzeria-hito3/
-
-**Repositorio:** https://github.com/Anita6684/pizzeria-hito3
+**Repositorio:** [https://github.com/Anita6684/pizzeria-hito3](https://github.com/Anita6684/pizzeria-hito3)
 
 **Autora:** Anamaría Flores Medina
-
