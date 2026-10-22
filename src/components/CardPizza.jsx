@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils/formatPrice.js';
 
 const CardPizza = ({
+  id,
   name,
   price,
   ingredients,
   img,
-  onViewMore,
   onAddToCart
 }) => {
   return (
@@ -20,7 +21,9 @@ const CardPizza = ({
       </div>
 
       <div className="card-body p-4 d-flex flex-column">
-        <h3 className="card-title text-center fw-bold mb-3">{name}</h3>
+        <h3 className="card-title text-center fw-bold mb-3">
+          {name}
+        </h3>
 
         <div className="ingredients-box mb-4">
           <p className="small text-uppercase text-secondary fw-semibold mb-2">
@@ -43,19 +46,20 @@ const CardPizza = ({
           </div>
 
           <div className="d-flex gap-2">
-            <button
+            <Link
               className="btn btn-outline-dark flex-fill"
-              onClick={onViewMore}
+              to={`/pizza/${id}`}
             >
               Ver más
-            </button>
+            </Link>
 
             <button
-  className="btn btn-dark flex-fill"
-  onClick={onAddToCart}
->
-  Añadir
-</button>
+              className="btn btn-dark flex-fill"
+              onClick={onAddToCart}
+              type="button"
+            >
+              Añadir
+            </button>
           </div>
         </div>
       </div>
@@ -64,6 +68,7 @@ const CardPizza = ({
 };
 
 export default CardPizza;
+
 
 
 

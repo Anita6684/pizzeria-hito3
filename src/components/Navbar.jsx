@@ -1,10 +1,13 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext.jsx';
+import { useUser } from '../context/UserContext.jsx';
 import { formatPrice } from '../utils/formatPrice.js';
 
 const Navbar = () => {
   const { total } = useCart();
+  const { token, logout } = useUser();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
@@ -35,17 +38,40 @@ const Navbar = () => {
               🍕 Home
             </Link>
 
-            <Link className="btn btn-outline-light btn-sm nav-btn" to="/login">
-              🔐 Login
-            </Link>
+            {token ? (
+              <>
+                <Link
+                  className="btn btn-outline-light btn-sm nav-btn"
+                  to="/profile"
+                >
+                  👤 Profile
+                </Link>
 
-            <Link className="btn btn-outline-light btn-sm nav-btn" to="/register">
-              🔐 Register
-            </Link>
+                <button
+                  className="btn btn-outline-light btn-sm nav-btn"
+                  onClick={logout}
+                  type="button"
+                >
+                  🔓 Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  className="btn btn-outline-light btn-sm nav-btn"
+                  to="/login"
+                >
+                  🔐 Login
+                </Link>
 
-            <Link className="btn btn-outline-light btn-sm nav-btn" to="/profile">
-              👤 Profile
-            </Link>
+                <Link
+                  className="btn btn-outline-light btn-sm nav-btn"
+                  to="/register"
+                >
+                  📝 Register
+                </Link>
+              </>
+            )}
 
             <Link
               className="btn btn-warning btn-sm fw-semibold nav-btn total-btn"

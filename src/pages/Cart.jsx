@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useCart } from '../context/CartContext.jsx';
+import { useUser } from '../context/UserContext.jsx';
 import { formatPrice } from '../utils/formatPrice.js';
 
 const Cart = () => {
@@ -11,6 +12,8 @@ const Cart = () => {
     deleteFromCart,
     total,
   } = useCart();
+
+  const { token } = useUser();
 
   return (
     <main className="py-5">
@@ -43,12 +46,16 @@ const Cart = () => {
                           <h5 className="fw-bold mb-1">
                             {pizza.name}
                           </h5>
+
                           <p className="mb-0 text-secondary">
                             ${formatPrice(pizza.price)}
                           </p>
+
                           <p className="mb-0 text-success fw-bold">
-  Subtotal: ${formatPrice(pizza.price * pizza.quantity)}
-</p>
+                            Subtotal: ${formatPrice(
+                              pizza.price * pizza.quantity
+                            )}
+                          </p>
                         </div>
 
                         <div className="col-4 col-md-6">
@@ -91,9 +98,19 @@ const Cart = () => {
                 <h4 className="fw-bold">
                   Total: ${formatPrice(total)}
                 </h4>
-                <button className="btn btn-dark mt-2">
+
+                <button
+                  className="btn btn-dark mt-2"
+                  disabled={!token}
+                >
                   Pagar
                 </button>
+
+                {!token && (
+                  <p className="text-danger mt-2 mb-0">
+                    Debes iniciar sesión para pagar.
+                  </p>
+                )}
               </div>
             </div>
           </>

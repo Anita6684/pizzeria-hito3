@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useCart } from '../context/CartContext.jsx';
 import napolitana from '../assets/imgs/napolitana.png';
 
 const Pizza = () => {
+  const { id } = useParams();
+  const { addToCart } = useCart();
+
   const [pizza, setPizza] = useState(null);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/pizzas/p001')
+    setPizza(null);
+    setError(false);
+
+    fetch(`http://localhost:5000/api/pizzas/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('No se pudo obtener la pizza');
@@ -22,7 +29,7 @@ const Pizza = () => {
         console.error('Error al obtener la pizza:', error);
         setError(true);
       });
-  }, []);
+  }, [id]);
 
   if (error) {
     return (
@@ -30,7 +37,8 @@ const Pizza = () => {
         <h2>No se pudo cargar la pizza</h2>
 
         <p>
-          Comprueba que el servidor de la API esté funcionando.
+          Comprueba que el servidor de la API esté funcionando
+          y que la pizza exista.
         </p>
 
         <Link to="/" className="btn btn-dark">
@@ -92,11 +100,7 @@ const Pizza = () => {
               <div className="d-flex gap-2 flex-wrap">
                 <button
                   className="btn btn-dark"
-                  onClick={() => {
-                    alert(
-                      'La función de carrito se implementará en el siguiente hito.'
-                    );
-                  }}
+                  onClick={() => addToCart(pizza)}
                 >
                   🛒 Añadir al carrito
                 </button>
@@ -117,5 +121,6 @@ const Pizza = () => {
 };
 
 export default Pizza;
+
 
 
