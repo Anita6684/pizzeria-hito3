@@ -1,13 +1,18 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext.jsx';
-import { useUser } from '../context/UserContext.jsx';
-import { formatPrice } from '../utils/formatPrice.js';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext.jsx";
+import { useUser } from "../context/UserContext.jsx";
+import { formatPrice } from "../utils/formatPrice.js";
 
 const Navbar = () => {
   const { total } = useCart();
   const { token, logout } = useUser();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
@@ -49,7 +54,7 @@ const Navbar = () => {
 
                 <button
                   className="btn btn-outline-light btn-sm nav-btn"
-                  onClick={logout}
+                  onClick={handleLogout}
                   type="button"
                 >
                   🔓 Logout
@@ -87,3 +92,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

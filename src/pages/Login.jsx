@@ -1,27 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const { login } = useUser();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage("");
 
     if (!email || !password) {
-      setMessage('Todos los campos son obligatorios.');
+      setMessage("Todos los campos son obligatorios.");
       return;
     }
 
     if (password.length < 6) {
-      setMessage('La contraseña debe tener al menos 6 caracteres.');
+      setMessage("La contraseña debe tener al menos 6 caracteres.");
       return;
     }
 
-    setMessage('¡Login exitoso!');
+    try {
+      await login(email, password);
 
-    setEmail('');
-    setPassword('');
+      setMessage("¡Login exitoso!");
+
+      setEmail("");
+      setPassword("");
+
+      navigate("/");
+    } catch (error) {
+      setMessage(error.message || "No se pudo iniciar sesión.");
+    }
   };
 
   return (
@@ -31,22 +45,28 @@ function Login() {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label>Correo electrónico</label>
+            <label htmlFor="email">Correo electrónico</label>
             <input
+              id="email"
+              name="email"
               type="email"
               className="form-control"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
 
           <div className="mb-3">
-            <label>Contraseña</label>
+            <label htmlFor="password">Contraseña</label>
             <input
+              id="password"
+              name="password"
               type="password"
               className="form-control"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
 

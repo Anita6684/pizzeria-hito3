@@ -1,8 +1,7 @@
-
-import React from 'react';
-import { useCart } from '../context/CartContext.jsx';
-import { useUser } from '../context/UserContext.jsx';
-import { formatPrice } from '../utils/formatPrice.js';
+import React, { useState } from "react";
+import { useCart } from "../context/CartContext.jsx";
+import { useUser } from "../context/UserContext.jsx";
+import { formatPrice } from "../utils/formatPrice.js";
 
 const Cart = () => {
   const {
@@ -14,6 +13,58 @@ const Cart = () => {
   } = useCart();
 
   const { token } = useUser();
+
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // Enviar carrito al backend
+  const handleCheckout = async () => {
+    setMessage("");
+    setError("");
+
+    if (!token) {
+      setError("Debes iniciar sesión para pagar.");
+      return;
+    }
+
+    if (cart.length === 0) {
+      setError("Tu carrito está vacío.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const response = await fetch(
+        "http://localhost:5000/api/checkouts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            cart: cart,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "No se pudo realizar la compra."
+        );
+      }
+
+      setMessage("¡Compra realizada exitosamente! 🍕");
+    } catch (error) {
+      setError(error.message || "Error al procesar la compra.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <main className="py-5">
@@ -52,7 +103,8 @@ const Cart = () => {
                           </p>
 
                           <p className="mb-0 text-success fw-bold">
-                            Subtotal: ${formatPrice(
+                            Subtotal: $
+                            {formatPrice(
                               pizza.price * pizza.quantity
                             )}
                           </p>
@@ -62,7 +114,10 @@ const Cart = () => {
                           <div className="d-flex align-items-center justify-content-end gap-2 flex-wrap">
                             <button
                               className="btn btn-outline-danger"
-                              onClick={() => removeFromCart(pizza.id)}
+                              onClick={() => {
+                                setMessage("");
+                                removeFromCart(pizza.id);
+                              }}
                             >
                               −
                             </button>
@@ -73,14 +128,20 @@ const Cart = () => {
 
                             <button
                               className="btn btn-outline-success"
-                              onClick={() => addToCart(pizza)}
+                              onClick={() => {
+                                setMessage("");
+                                addToCart(pizza);
+                              }}
                             >
                               +
                             </button>
 
                             <button
                               className="btn btn-danger btn-sm"
-                              onClick={() => deleteFromCart(pizza.id)}
+                              onClick={() => {
+                                setMessage("");
+                                deleteFromCart(pizza.id);
+                              }}
                             >
                               Eliminar
                             </button>
@@ -101,14 +162,27 @@ const Cart = () => {
 
                 <button
                   className="btn btn-dark mt-2"
-                  disabled={!token}
+                  onClick={handleCheckout}
+                  disabled={!token || loading}
                 >
-                  Pagar
+                  {loading ? "Procesando compra..." : "Pagar"}
                 </button>
 
                 {!token && (
                   <p className="text-danger mt-2 mb-0">
                     Debes iniciar sesión para pagar.
+                  </p>
+                )}
+
+                {message && (
+                  <p className="text-success fw-bold mt-3 mb-0">
+                    {message}
+                  </p>
+                )}
+
+                {error && (
+                  <p className="text-danger mt-3 mb-0">
+                    {error}
                   </p>
                 )}
               </div>
@@ -121,5 +195,6 @@ const Cart = () => {
 };
 
 export default Cart;
+
 
 
